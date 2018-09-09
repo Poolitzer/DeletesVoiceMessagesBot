@@ -12,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 data_file = open('./database.json')
 database = json.load(data_file)
 
-updater = Updater(token='686965201:AAE4CfqQmwkH5kOeO6ri7w_mcCd_aQFyDpY')
+updater = Updater(token='TOKEN')
 dispatcher = updater.dispatcher
 
 
@@ -26,6 +26,8 @@ def start(bot, update, args):
                                           callback_data='en{}'.format(real_id)),
                      InlineKeyboardButton(languages.german["{}".format(language)],
                                           callback_data='de{}'.format(real_id))],
+                    [InlineKeyboardButton(languages.uzbek["{}".format(language)],
+                                          callback_data='uz{}'.format(update.message.chat_id))]
                     ]
         languages_markup = InlineKeyboardMarkup(keyboard)
         update.message.reply_text(text=languages.setting["{}".format(language)], reply_markup=languages_markup)
@@ -43,6 +45,8 @@ def lang(bot, update):
                                       callback_data='en{}'.format(update.message.chat_id)),
                  InlineKeyboardButton(languages.german["{}".format(language)],
                                       callback_data='de{}'.format(update.message.chat_id))],
+                [InlineKeyboardButton(languages.uzbek["{}".format(language)],
+                                      callback_data='uz{}'.format(update.message.chat_id))]
                 ]
     starting = [[InlineKeyboardButton("Start",
                                       "https://t.me/DeleteVoiceMessagesBot?start=start{}".format(update.message.chat_id)
@@ -147,7 +151,7 @@ def statistic(bot, update):
 def add(bot, update):
     language = save(update)
     for ids in update.message.new_chat_members:
-        if ids["id"] is 659659397:
+        if ids["id"] == 686965201:
             bot.send_message(chat_id=update.message.chat_id, text=languages.joined["{}".format(language)])
             break
 
